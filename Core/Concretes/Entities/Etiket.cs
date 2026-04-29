@@ -12,6 +12,5 @@ namespace Core.Concretes.Entities
         [ForeignKey("Makale")]
         public int MakaleId { get; set; }
         public virtual Makale? Makale { get; set; }
-        
     }
 }
