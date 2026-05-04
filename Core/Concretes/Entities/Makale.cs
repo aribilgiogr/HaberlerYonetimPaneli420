@@ -14,6 +14,9 @@ namespace Core.Concretes.Entities
 
         public string Icerik { get; set; } = null!;
 
+        public bool Taslak { get; set; } = true;
+        public DateTime? YayinlanmaTarihi { get; set; }
+
         [ForeignKey("Kategori")]
         public int KategoriId { get; set; }
 
