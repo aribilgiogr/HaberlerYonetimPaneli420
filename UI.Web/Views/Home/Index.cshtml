@@ -1,65 +1,48 @@
 ﻿@model IEnumerable<Core.Concretes.DTOs.MakaleKartDto>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Makale Listesi";
 }
 
-<h1>Index</h1>
+<h1>Makale Listesi</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Yeni Makale Ekle</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Baslik)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KapakGorseliYolu)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.YayinlanmaTarihi)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KategoriId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.KategoriAd)
-            </th>
+            <th>Kapak Görseli</th>
+            <th>Başlık</th>
+            <th>Kategori</th>
+            <th>Yayınlanma Tarihi</th>
+            <th>Etiketler</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Baslik)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KapakGorseliYolu)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.YayinlanmaTarihi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KategoriId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KategoriAd)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@(item.KapakGorseliYolu ?? "/images/default.png")" class="img-thumbnail" style="width:5rem;" alt="@item.Baslik" />
+                </td>
+                <td>@item.Baslik</td>
+                <td>@item.KategoriAd</td>
+                <td>@(item.YayinlanmaTarihi?.ToString() ?? "Yayında Değil")</td>
+                <td>@string.Join(", ", item.Etiketler)</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="6" class="text-center fw-bold">Hiç makale bulunamadı.</td>
+            </tr>
+        }
     </tbody>
 </table>

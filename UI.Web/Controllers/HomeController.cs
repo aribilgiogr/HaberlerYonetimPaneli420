@@ -18,6 +18,11 @@ namespace UI.Web.Controllers
             return View(await service.MakaleleriGetir());
         }
 
+        public IActionResult Create()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

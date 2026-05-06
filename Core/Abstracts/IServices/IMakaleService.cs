@@ -10,5 +10,6 @@ namespace Core.Abstracts.IServices
     public interface IMakaleService
     {
         Task<IEnumerable<MakaleKartDto>> MakaleleriGetir();
+        Task MakaleEkleAsync(YeniMakaleDto yeniMakale);
     }
 }
