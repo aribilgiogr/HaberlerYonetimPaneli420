@@ -13,9 +13,21 @@ namespace Business.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public Task<IEnumerable<MakaleKartDto>> MakaleleriGetir()
+        public async Task<IEnumerable<MakaleKartDto>> MakaleleriGetir()
         {
-            throw new NotImplementedException();
+            var makaleler = await unitOfWork.Makaleler.ReadManyAsync(x => x.Aktif && !x.Silindi && !x.Taslak, "Kategori", "Etiketler");
+            
+            return from m in makaleler
+                   select new MakaleKartDto
+                   {
+                       Id = m.Id,
+                       Baslik = m.Baslik,
+                       KapakGorseliYolu = m.KapakGorseliYolu,
+                       YayinlanmaTarihi = m.YayinlanmaTarihi,
+                       KategoriId = m.KategoriId,
+                       KategoriAd = m.Kategori.Ad,
+                       Etiketler = m.Etiketler.Select(e => e.Ad).ToList()
+                   };
         }
     }
 }
