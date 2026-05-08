@@ -1,6 +1,8 @@
 using Core.Abstracts.IServices;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using UI.Web.Models;
 
 namespace UI.Web.Controllers
@@ -18,9 +20,25 @@ namespace UI.Web.Controllers
             return View(await service.MakaleleriGetir());
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var kategoriler = await service.KategorileriGetir();
+            ViewBag.Kategoriler = new SelectList(kategoriler, "Id", "Ad");
             return View();
+        }
+
+        public async Task<IActionResult> Kategoriler(int? id)
+        {
+            var kategoriler = await service.KategorileriGetir();
+            var secili = id != null ? kategoriler.FirstOrDefault(x => x.Id == id) : null;
+
+            var model = new KategorilerViewModel
+            {
+                Kategoriler = kategoriler,
+                SeciliKategori = secili
+            };
+
+            return View(model);
         }
 
         public IActionResult Privacy()

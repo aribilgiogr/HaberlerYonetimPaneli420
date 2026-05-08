@@ -1,0 +1,23 @@
+﻿@model UI.Web.Models.KategorilerViewModel
+
+@{
+	ViewData["Title"] = "Kategoriler";
+}
+
+<h1>Kategoriler</h1>
+<div class="row g-4">
+	<div class="col-md-6">
+		<h5>Kategori Formu:</h5>
+		<hr />
+		<form asp-action="kategoriOlustur">
+			<div class="form-group">
+				<label asp-for="SeciliKategori.Ad" class="control-label"></label>
+				<input asp-for="SeciliKategori.Ad" class="form-control" />
+				<span class="text-danger" asp-validation-for="SeciliKategori.Ad"></span>
+			</div>
+			<button type="submit" class="btn btn-outline-dark">Kaydet</button>
+		</form>
+	</div>
+	<div class="col-md-6">
+	</div>
+</div>

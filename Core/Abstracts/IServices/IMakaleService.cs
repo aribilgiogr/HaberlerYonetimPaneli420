@@ -11,5 +11,11 @@ namespace Core.Abstracts.IServices
     {
         Task<IEnumerable<MakaleKartDto>> MakaleleriGetir();
         Task MakaleEkleAsync(YeniMakaleDto yeniMakale);
+
+        // Kategoriler:
+        Task<IEnumerable<KategoriDto>> KategorileriGetir();
+        Task KategoriEkleAsync(string ad);
+        Task KategoriSilAsync(int id);
+        Task KategoriGuncelleAsync(int id, string yeniAd);
     }
 }

@@ -14,6 +14,34 @@ namespace Business.Services
             this.unitOfWork = unitOfWork;
         }
 
+        public async Task KategoriEkleAsync(string ad)
+        {
+            var kategori = new Kategori { Ad = ad };
+            await unitOfWork.Kategoriler.CreateAsync(kategori);
+            await unitOfWork.CommitAsync();
+        }
+
+        public Task KategoriGuncelleAsync(int id, string yeniAd)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<KategoriDto>> KategorileriGetir()
+        {
+            var kategoriler = await unitOfWork.Kategoriler.ReadManyAsync();
+            return from k in kategoriler
+                   select new KategoriDto
+                   {
+                       Id = k.Id,
+                       Ad = k.Ad
+                   };
+        }
+
+        public Task KategoriSilAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task MakaleEkleAsync(YeniMakaleDto yeniMakale)
         {
             // yeniMakale ile gelen görselin kaydedilmesi:
