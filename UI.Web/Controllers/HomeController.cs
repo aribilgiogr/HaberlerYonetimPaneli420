@@ -41,6 +41,13 @@ namespace UI.Web.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> KategoriOlustur(KategorilerViewModel model)
+        {
+            await service.KategoriEkleAsync(model.SeciliKategori.Ad);
+            return RedirectToAction("kategoriler");
+        }
+
         public IActionResult Privacy()
         {
             return View();

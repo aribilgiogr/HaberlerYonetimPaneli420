@@ -5,6 +5,7 @@
 }
 
 <h1>Kategoriler</h1>
+
 <div class="row g-4">
 	<div class="col-md-6">
 		<h5>Kategori Formu:</h5>
@@ -19,5 +20,33 @@
 		</form>
 	</div>
 	<div class="col-md-6">
+		<h5>Kayıtlı Kategoriler</h5>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Ad</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var kategori in Model.Kategoriler)
+				{
+					<tr>
+						<td>@kategori.Id</td>
+						<td>@kategori.Ad</td>
+						<td><a asp-action="kategoriler" asp-route-id="@kategori.Id" class="btn btn-outline-secondary btn-sm">Seç</a></td>
+					</tr>
+				}
+				@if (!Model.Kategoriler.Any())
+				{
+					<tr>
+						<td colspan="3">
+							<h5>Kayıtlı Kategori Bulunamadı</h5>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
 	</div>
 </div>
